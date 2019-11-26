@@ -10,23 +10,28 @@ export class HomePage {
   people: any[] = [{
     "name": "Samarth",
     "email": "samarth@something.com",
-    "designation": "Developer"
+    "designation": "Developer",
+    "allowDelete": true
   }, {
     "name": "Samarth",
     "email": "samarth@something.com",
-    "designation": "Developer"
+    "designation": "Jr. Developer",
+    "allowDelete": false
   },{
     "name": "Samarth",
     "email": "samarth@something.com",
-    "designation": "Developer"
+    "designation": "Developer",
+    "allowDelete": true
   },{
     "name": "Samarth",
     "email": "samarth@something.com",
-    "designation": "Developer"
+    "designation": "Developer",
+    "allowDelete": true
   },{
     "name": "Samarth",
     "email": "samarth@something.com",
-    "designation": "Developer"
+    "designation": "Developer",
+    "allowDelete": true
   },];
 
   constructor() {}
