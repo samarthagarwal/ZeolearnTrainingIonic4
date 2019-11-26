@@ -7,6 +7,28 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
+  people: any[] = [{
+    "name": "Samarth",
+    "email": "samarth@something.com",
+    "designation": "Developer"
+  }, {
+    "name": "Samarth",
+    "email": "samarth@something.com",
+    "designation": "Developer"
+  },{
+    "name": "Samarth",
+    "email": "samarth@something.com",
+    "designation": "Developer"
+  },{
+    "name": "Samarth",
+    "email": "samarth@something.com",
+    "designation": "Developer"
+  },{
+    "name": "Samarth",
+    "email": "samarth@something.com",
+    "designation": "Developer"
+  },];
+
   constructor() {}
 
 }
