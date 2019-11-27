@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -34,6 +35,20 @@ export class HomePage {
     "allowDelete": true
   },];
 
-  constructor() {}
+  constructor(private router: Router) {
+    
+  }
+
+  // ionViewDidEnter() {
+  //   document.querySelector('#mySelect').shadowRoot.querySelector('.select-text').setAttribute('style', 'white-space:normal');
+  // }
+
+  ionViewDidEnter() {
+    console.log("ionViewDidEnter Home Page");
+  }
+
+  navigate() {
+    this.router.navigate(["/office"]);
+  }
 
 }

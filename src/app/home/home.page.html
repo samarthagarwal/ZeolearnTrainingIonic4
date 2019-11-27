@@ -27,35 +27,50 @@
 
   <ion-list>
 
-    <ion-item-sliding *ngFor="let person of people">
+    <ion-item>
+      <ion-icon name="mail" slot="start"></ion-icon>
+      <ion-label position="fixed">Email</ion-label>
+      <ion-input type="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="key" slot="start"></ion-icon>
+      <ion-label>Password</ion-label>
+      <ion-input type="password" placeholder="12345678"></ion-input>
+    </ion-item>
+
+    <ion-radio-group>
+      <ion-list-header>
+        Select Gender
+      </ion-list-header>
       <ion-item>
-        <ion-thumbnail slot="start">
-          <ion-img src="https://loremflickr.com/64/64"></ion-img>
-        </ion-thumbnail>
-        <ion-avatar slot="end">
-          <ion-img src="https://loremflickr.com/64/64"></ion-img>
-        </ion-avatar>
-        <ion-label>
-          <h2>{{ person.name}}</h2>
-          <h3>{{ person.designation}}</h3>
-          <p>{{ person.email}}</p>
-        </ion-label>
+        <ion-label>Male</ion-label>
+        <ion-radio value="male"></ion-radio>
       </ion-item>
+      <ion-item>
+        <ion-label>Female</ion-label>
+        <ion-radio value="female"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
 
-      <ion-item-options side="start">
-        <ion-item-option color="success">
-          <ion-icon slot="icon-only" name="archive"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
+    <ion-item>
+      <ion-label>I accept the terms</ion-label>
+      <ion-checkbox color="danger" slot="start"></ion-checkbox>
+    </ion-item>
 
-      <ion-item-options side="end" *ngIf="person.allowDelete">
-        <ion-item-option color="danger">
-            <ion-icon slot="icon-only" name="trash"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
-
-    </ion-item-sliding>
+    <ion-item>
+      <ion-label>Select Your Designation</ion-label>
+      <ion-select interface="alert" id="mySelect">
+          <ion-select-option>Jr.Developer</ion-select-option>
+          <ion-select-option>Developer Godzilla Dino</ion-select-option>
+          <ion-select-option>Project Manager</ion-select-option>
+          <ion-select-option>Team Lead</ion-select-option>
+      </ion-select>
+      
+    </ion-item>
 
   </ion-list>
+
+  <ion-button (click)="navigate()">Go to Office</ion-button>
 
 </ion-content>
