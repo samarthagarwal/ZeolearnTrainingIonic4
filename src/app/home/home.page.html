@@ -25,52 +25,30 @@
 
 <ion-content>
 
-  <ion-list>
+  <ion-card>
+    
+    <ion-card-header>
+      <ion-card-title>
+        New Post
+      </ion-card-title>
+      <ion-card-subtitle>
+        This is a new post!
+      </ion-card-subtitle>
+    </ion-card-header>
+    
+    <ion-img src="http://lorempixel.com/400/200/sports"></ion-img>
+    
+    <ion-card-content>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident qui non sint natus ipsam illum voluptatibus aspernatur fugit sit quibusdam beatae iste, unde ea odio nisi, amet id laudantium suscipit!
+    </ion-card-content>
 
-    <ion-item>
-      <ion-icon name="mail" slot="start"></ion-icon>
-      <ion-label position="fixed">Email</ion-label>
-      <ion-input type="email"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-icon name="key" slot="start"></ion-icon>
-      <ion-label>Password</ion-label>
-      <ion-input type="password" placeholder="12345678"></ion-input>
-    </ion-item>
-
-    <ion-radio-group>
-      <ion-list-header>
-        Select Gender
-      </ion-list-header>
+    <ion-list>
       <ion-item>
-        <ion-label>Male</ion-label>
-        <ion-radio value="male"></ion-radio>
+        This is an item
       </ion-item>
-      <ion-item>
-        <ion-label>Female</ion-label>
-        <ion-radio value="female"></ion-radio>
-      </ion-item>
-    </ion-radio-group>
+    </ion-list>
 
-    <ion-item>
-      <ion-label>I accept the terms</ion-label>
-      <ion-checkbox color="danger" slot="start"></ion-checkbox>
-    </ion-item>
 
-    <ion-item>
-      <ion-label>Select Your Designation</ion-label>
-      <ion-select interface="alert" id="mySelect">
-          <ion-select-option>Jr.Developer</ion-select-option>
-          <ion-select-option>Developer Godzilla Dino</ion-select-option>
-          <ion-select-option>Project Manager</ion-select-option>
-          <ion-select-option>Team Lead</ion-select-option>
-      </ion-select>
-      
-    </ion-item>
-
-  </ion-list>
-
-  <ion-button (click)="navigate()">Go to Office</ion-button>
+  </ion-card>
 
 </ion-content>
