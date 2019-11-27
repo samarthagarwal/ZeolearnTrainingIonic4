@@ -35,6 +35,17 @@ export class HomePage {
     "allowDelete": true
   },];
 
+  color_name: string = "primary";
+
+  user: any = {
+    username: "",
+    designation: "developer",
+    accepted: false,
+    favoriteColor: ""
+  }
+
+  designations: any [] = ["Developer", "Manager", "Teacher"];
+
   constructor(private router: Router) {
     
   }
@@ -49,6 +60,10 @@ export class HomePage {
 
   navigate() {
     this.router.navigate(["/office"]);
+  }
+
+  onClicked(user: any) {
+    console.log(user);
   }
 
 }
