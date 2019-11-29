@@ -25,51 +25,12 @@
 
 <ion-content>
 
-  <ion-list>
-    <ion-item>
-      <ion-label position="floating">
-        Name
-      </ion-label>
-      <ion-input type="text" [(ngModel)]="user.username"></ion-input>
-    </ion-item>
+  <ion-button (click)="showLoading()" expand="block">Show Loading</ion-button>
 
-    <ion-radio-group [(ngModel)]="user.designation">
-      <ion-list-header>
-        Select Designation
-      </ion-list-header>
-      <ion-item *ngFor="let des of designations">
-        <ion-label>
-          {{ des }}
-        </ion-label>
-        <ion-radio [value]="des"></ion-radio>
-      </ion-item>
-    </ion-radio-group>
+  <ion-button (click)="showToast()" expand="block">Show Toast</ion-button>
+  
+  <ion-button (click)="showAlert()" expand="block">Show Alert</ion-button>
 
-    <ion-item>
-      <ion-label>
-        I accept the terms and conditions
-      </ion-label>
-      <ion-checkbox slot="start" color="danger" [(ngModel)]="user.accepted"></ion-checkbox>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>
-        Select Favorite Color
-      </ion-label>
-      <ion-select [(ngModel)]="user.favoriteColor">
-        <ion-select-option value="red">
-          Red
-        </ion-select-option>
-        <ion-select-option value="green">
-          Green
-        </ion-select-option>
-        <ion-select-option value="blue">
-          Blue
-        </ion-select-option>
-      </ion-select>
-    </ion-item>
-
-  </ion-list>
-  <ion-button (click)="onClicked(user)">Click Me</ion-button>
+  <ion-button (click)="showActionSheet()" expand="block">Show Actionsheet</ion-button>
 
 </ion-content>
