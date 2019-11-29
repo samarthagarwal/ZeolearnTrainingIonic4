@@ -25,12 +25,30 @@
 
 <ion-content>
 
-  <ion-button (click)="showLoading()" expand="block">Show Loading</ion-button>
+  <ion-refresher slot="fixed" (ionRefresh)="refreshMyList($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to Refresh"
+      refreshingSpinner="bubbles"
+      refreshingText="Refreshing..."
+    ></ion-refresher-content>
+  </ion-refresher>
 
-  <ion-button (click)="showToast()" expand="block">Show Toast</ion-button>
-  
-  <ion-button (click)="showAlert()" expand="block">Show Alert</ion-button>
+  <ion-list>
+    <ion-item *ngFor="let person of people; let i=index">
+      <ion-avatar slot="start">
+        <ion-img [src]="person.image_url"></ion-img>
+      </ion-avatar>
+      <ion-label>
+        <h2> {{ i + 1 }} - {{ person.first_name + ' ' + person.last_name }}</h2>
+        <h3>{{ person.gender }} </h3>
+        <p> {{ person.email }} </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 
-  <ion-button (click)="showActionSheet()" expand="block">Show Actionsheet</ion-button>
+  <ion-infinite-scroll threshold="5px" (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
 </ion-content>
