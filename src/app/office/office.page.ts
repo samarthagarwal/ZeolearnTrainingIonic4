@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { NavigationService } from '../navigation.service';
 
 @Component({
   selector: 'app-office',
@@ -7,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OfficePage {
 
-  constructor() { }
+  constructor(private activatedRoute: ActivatedRoute, private navService: NavigationService) {
 
-  ionViewDidEnter() {
-    console.log("ionViewDidEnter Office Page");
+    // let id = this.activatedRoute.snapshot.paramMap.get("id");
+    let id = this.navService.getId();
+    console.log(id);
+
   }
 
 

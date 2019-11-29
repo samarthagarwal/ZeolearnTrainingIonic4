@@ -4,16 +4,20 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { OfficePageRoutingModule } from './office-routing.module';
-
 import { OfficePage } from './office.page';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    OfficePageRoutingModule
+    RouterModule.forChild([
+      {
+        path: '',
+        component: OfficePage
+      }
+    ])
   ],
   declarations: [OfficePage]
 })

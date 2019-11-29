@@ -35,7 +35,7 @@
   </ion-refresher>
 
   <ion-list>
-    <ion-item *ngFor="let person of people; let i=index">
+    <ion-item *ngFor="let person of people; let i=index" (click)="gotoOffice(person)">
       <ion-avatar slot="start">
         <ion-img [src]="person.image_url"></ion-img>
       </ion-avatar>

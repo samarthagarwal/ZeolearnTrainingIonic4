@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { Router } from "@angular/router";
 import { LoadingController, ToastController, AlertController, ActionSheetController } from '@ionic/angular';
+import { NavigationService } from '../navigation.service';
 
 @Component({
   selector: 'app-home',
@@ -724,7 +725,7 @@ export class HomePage {
 
   designations: any [] = ["Developer", "Manager", "Teacher"];
 
-  constructor(private router: Router, private loadingCtrl: LoadingController, private toastCtrl: ToastController, private alertCtrl: AlertController, private actionSheetCtrl: ActionSheetController) {
+  constructor(private router: Router, private loadingCtrl: LoadingController, private toastCtrl: ToastController, private alertCtrl: AlertController, private actionSheetCtrl: ActionSheetController, private navService: NavigationService) {
     
   }
 
@@ -842,6 +843,13 @@ export class HomePage {
     if(this.people.length >= 200) {
       event.target.disabled = true;
     }
+  }
+
+  gotoOffice(person) {
+
+    this.navService.setId(person.id);
+
+    this.router.navigate(['/office/']);
   }
 
 }
