@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable, observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -8,33 +8,20 @@ import { Observable, observable } from 'rxjs';
 })
 export class HomePage {
 
-  count: number = 0;
-  temperature;
+  people: any[] = [];
+  API_KEY: string = "";
+  CITY_NAME: string = "New Delhi";
 
-  constructor() {
+  constructor(private http: HttpClient) {
 
-    let myObservable = new Observable((observer) => {
-      
-      let interval = setInterval(() => {
-        observer.next(Math.random());
-        this.count++;
+    // this.http.get("http://www.json-generator.com/api/json/get/cepYMQaZqq?indent=2").toPromise().then((data: any[]) => {
+    //   console.log(data)
+    //   this.people = data;
+    // })
 
-        if(this.count == 5) {
-          clearInterval(interval);
-          observer.complete();
-        }
-
-      }, 3000);
-      
+    this.http.get("http://api.openweathermap.org/data/2.5/weather?q=" + this.CITY_NAME + "&appid=" + this.API_KEY).toPromise().then((data) => {
+      console.log(data);
     })
-
-
-    myObservable.subscribe((value) => {
-      console.log(value);
-      this.temperature = value;
-    })
-
-
 
   }
 }

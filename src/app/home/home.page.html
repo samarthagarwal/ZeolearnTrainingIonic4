@@ -25,41 +25,18 @@
 
 <ion-content>
 
-  <ion-refresher slot="fixed" (ionRefresh)="refreshMyList($event)">
-    <ion-refresher-content
-      pullingIcon="arrow-dropdown"
-      pullingText="Pull to Refresh"
-      refreshingSpinner="bubbles"
-      refreshingText="Refreshing..."
-    ></ion-refresher-content>
-  </ion-refresher>
-
+  
   <ion-list>
-    <ion-item *ngFor="let person of people; let i=index" (click)="gotoOffice(person)">
+    <ion-item *ngFor="let person of people; let i=index" >
       <ion-avatar slot="start">
-        <ion-img [src]="person.image_url"></ion-img>
+        <ion-img [src]="person.picture"></ion-img>
       </ion-avatar>
       <ion-label>
-        <h2> {{ i + 1 }} - {{ person.first_name + ' ' + person.last_name }}</h2>
-        <h3>{{ person.gender }} </h3>
+        <h2> {{ person.name }}</h2>
+        <h3>{{ person.company }} </h3>
         <p> {{ person.email }} </p>
       </ion-label>
     </ion-item>
   </ion-list>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>
-        {{ temperature}} F
-      </ion-card-title>
-      <ion-card-subtitle>
-        TEMPERATURE
-      </ion-card-subtitle>
-    </ion-card-header>
-  </ion-card>
-
-  <ion-infinite-scroll threshold="5px" (ionInfinite)="loadMore($event)">
-    <ion-infinite-scroll-content></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
 
 </ion-content>
