@@ -8,6 +8,10 @@ const routes: Routes = [
     path: 'office',
     loadChildren: () => import('./office/office.module').then( m => m.OfficePageModule)
   },
+  {
+    path: 'overflow',
+    loadChildren: () => import('./overflow/overflow.module').then( m => m.OverflowPageModule)
+  },
 ];
 
 @NgModule({

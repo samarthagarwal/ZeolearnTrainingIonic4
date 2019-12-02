@@ -1,7 +1,9 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { Router } from "@angular/router";
-import { LoadingController, ToastController, AlertController, ActionSheetController } from '@ionic/angular';
+import { LoadingController, ToastController, AlertController, ActionSheetController, ModalController, PopoverController } from '@ionic/angular';
 import { NavigationService } from '../navigation.service';
+import { OfficePage } from '../office/office.page';
+import { OverflowPage } from '../overflow/overflow.page';
 
 @Component({
   selector: 'app-home',
@@ -725,7 +727,7 @@ export class HomePage {
 
   designations: any [] = ["Developer", "Manager", "Teacher"];
 
-  constructor(private router: Router, private loadingCtrl: LoadingController, private toastCtrl: ToastController, private alertCtrl: AlertController, private actionSheetCtrl: ActionSheetController, private navService: NavigationService) {
+  constructor(private router: Router, private loadingCtrl: LoadingController, private toastCtrl: ToastController, private alertCtrl: AlertController, private actionSheetCtrl: ActionSheetController, private navService: NavigationService, private modalCtrl: ModalController, private popoverCtrl: PopoverController) {
     
   }
 
@@ -845,11 +847,38 @@ export class HomePage {
     }
   }
 
-  gotoOffice(person) {
+  async gotoOffice(person) {
 
-    this.navService.setId(person.id);
+    // this.navService.setId(person.id);
 
-    this.router.navigate(['/office/']);
+    // this.router.navigate(['/office/']);
+
+    let modal = await this.modalCtrl.create({
+      component: OfficePage,
+      componentProps: {
+        "name": "Samarth Agarwal"
+      }
+    });
+
+    modal.onDidDismiss().then((response) => {
+      console.log("Modal was closed and we got");
+      console.log(response.data.name);
+    })
+
+    modal.present();
+
+  }
+
+  async showOptions(ev) {
+
+    console.log(ev);
+    let popover = await this.popoverCtrl.create({
+      component: OverflowPage,
+      event: ev
+    });
+
+    popover.present();
+
   }
 
 }
