@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -8,53 +8,33 @@ import { Observable } from 'rxjs';
 })
 export class HomePage {
 
-  a: number;
+  count: number = 0;
+  temperature;
 
   constructor() {
-    this.start();
-  }
 
-  
+    let myObservable = new Observable((observer) => {
+      
+      let interval = setInterval(() => {
+        observer.next(Math.random());
+        this.count++;
 
-  async start() {
-    console.log("Line 13")
-    console.log("Long running task started...")
+        if(this.count == 5) {
+          clearInterval(interval);
+          observer.complete();
+        }
 
-    // this.emulateLongTask()
-    // .then(() => {
-    //   console.log("Line 17")
-    //   console.log(this.a);
-    // })
-    // .catch(() => {
-    //   console.log("An error occured");
-    // })
-    // .finally(() => {
-    //   console.log("Finally all done!");
-    // })
-
-    try {
-      await this.emulateLongTask();
-
-      console.log(this.a);
-    } catch(ex) {
-      console.log("An error occured");
-    } finally {
-      console.log("Finally all done!")
-    }
-  }
-
-  emulateLongTask(): Promise<void> {
-    return new Promise((resolve, reject) => {
-      // resolve() // indicates successful completion of the job
-      // reject() // indicates failed completion of the job
-
-      setTimeout(() => {
-        // long running task finished
-        console.log("long running task finished");
-        this.a = 45;
-        resolve();
-      }, 5000);
+      }, 3000);
+      
     })
-  }
 
+
+    myObservable.subscribe((value) => {
+      console.log(value);
+      this.temperature = value;
+    })
+
+
+
+  }
 }
