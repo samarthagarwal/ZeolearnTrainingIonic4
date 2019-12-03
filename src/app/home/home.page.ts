@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { ActionSheetController } from '@ionic/angular';
+import { Geolocation, GeolocationOptions } from '@ionic-native/geolocation/ngx';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -10,58 +10,36 @@ import { ActionSheetController } from '@ionic/angular';
 })
 export class HomePage {
 
-  people: any[] = [];
-  API_KEY: string = "";
-  CITY_NAME: string = "New Delhi";
+  API_KEY: string = "53591a412c95932221df665561b01151";
 
-  imageBase64URL: string;
+  constructor(private http: HttpClient, private geolocation: Geolocation, private loadingCtrl: LoadingController) {
 
-  constructor(private http: HttpClient, private camera: Camera, private actionsheetCtrl: ActionSheetController) {
-
+    this.getPosition();
 
   }
 
-  async showActionSheet() {
-    let actionSheet = await this.actionsheetCtrl.create({
-      header: "Choose source",
-      buttons: [{
-        icon: "camera",
-        text: "Camera",
-        handler: () => {
-          this.launchCamera(1);
-        }
-      }, {
-        icon: "images",
-        text: "Gallery",
-        handler: () => {
-          this.launchCamera(0);
-        }
-      }]
-    })
+  async getPosition() {
 
-    actionSheet.present();
-  }
+    let loading = await this.loadingCtrl.create({
+      message: "Getting weather info..."
+    });
 
-  async launchCamera(sourceType: number) {
-    
-    let options: CameraOptions = {
-      targetHeight: 400,
-      targetWidth: 400,
-      encodingType: 1,
-      sourceType: sourceType,
-      destinationType: 0,
-      quality: 80
+    loading.present();
+
+    let options: GeolocationOptions = {
+      maximumAge: 0,
+      timeout: 10000,
+      enableHighAccuracy: true
     }
 
-    try { 
-      let image = await this.camera.getPicture(options);
-      console.log(image);
-      this.imageBase64URL = "data:image/png;base64," + image;
-    } catch {
-      
-      console.log("User canceled the flow!");
+    let position = await this.geolocation.getCurrentPosition(options);
+    console.log(position);
 
-    }
+    let response = await this.http.get("https://api.openweathermap.org/data/2.5/weather?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude + "&appid=" + this.API_KEY).toPromise();
+
+    loading.dismiss();
+
+    console.log(response);
 
   }
 }
