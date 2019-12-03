@@ -25,6 +25,13 @@
 
 <ion-content>
 
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">Enter Name</ion-label>
+      <ion-input type="text" [(ngModel)]="username"></ion-input>
+    </ion-item>
   
+    <ion-button expand="block" (click)="save()" color="danger">Save</ion-button>
+  </ion-list>
 
 </ion-content>

@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Geolocation, GeolocationOptions } from '@ionic-native/geolocation/ngx';
-import { LoadingController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-home',
@@ -10,36 +8,33 @@ import { LoadingController } from '@ionic/angular';
 })
 export class HomePage {
 
-  API_KEY: string = "53591a412c95932221df665561b01151";
+  username: string;
 
-  constructor(private http: HttpClient, private geolocation: Geolocation, private loadingCtrl: LoadingController) {
+  constructor(private storage: Storage) {
 
-    this.getPosition();
+    this.load();
+    
+  }
+
+  async load() {
+    this.storage.ready().then(async () => {
+      // use storage safely
+
+      this.username = await this.storage.get("username");
+      console.log("Value loaded - " + this.username);
+
+    })
 
   }
 
-  async getPosition() {
+  async save() {
+    if(this.username) {
 
-    let loading = await this.loadingCtrl.create({
-      message: "Getting weather info..."
-    });
+      await this.storage.clear();
+      await this.storage.set("username", this.username);
+      console.log("Value saved successfully!");
 
-    loading.present();
-
-    let options: GeolocationOptions = {
-      maximumAge: 0,
-      timeout: 10000,
-      enableHighAccuracy: true
     }
-
-    let position = await this.geolocation.getCurrentPosition(options);
-    console.log(position);
-
-    let response = await this.http.get("https://api.openweathermap.org/data/2.5/weather?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude + "&appid=" + this.API_KEY).toPromise();
-
-    loading.dismiss();
-
-    console.log(response);
-
   }
+
 }
