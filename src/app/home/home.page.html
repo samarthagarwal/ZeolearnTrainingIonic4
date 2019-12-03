@@ -25,18 +25,14 @@
 
 <ion-content>
 
-  
-  <ion-list>
-    <ion-item *ngFor="let person of people; let i=index" >
-      <ion-avatar slot="start">
-        <ion-img [src]="person.picture"></ion-img>
-      </ion-avatar>
-      <ion-label>
-        <h2> {{ person.name }}</h2>
-        <h3>{{ person.company }} </h3>
-        <p> {{ person.email }} </p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" (click)="showActionSheet()">
+    <ion-fab-button color="danger">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-card *ngIf="imageBase64URL != null">
+    <ion-img [src]="imageBase64URL"></ion-img>
+  </ion-card>
 
 </ion-content>

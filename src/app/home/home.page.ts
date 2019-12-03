@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { ActionSheetController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -12,16 +14,54 @@ export class HomePage {
   API_KEY: string = "";
   CITY_NAME: string = "New Delhi";
 
-  constructor(private http: HttpClient) {
+  imageBase64URL: string;
 
-    // this.http.get("http://www.json-generator.com/api/json/get/cepYMQaZqq?indent=2").toPromise().then((data: any[]) => {
-    //   console.log(data)
-    //   this.people = data;
-    // })
+  constructor(private http: HttpClient, private camera: Camera, private actionsheetCtrl: ActionSheetController) {
 
-    this.http.get("http://api.openweathermap.org/data/2.5/weather?q=" + this.CITY_NAME + "&appid=" + this.API_KEY).toPromise().then((data) => {
-      console.log(data);
+
+  }
+
+  async showActionSheet() {
+    let actionSheet = await this.actionsheetCtrl.create({
+      header: "Choose source",
+      buttons: [{
+        icon: "camera",
+        text: "Camera",
+        handler: () => {
+          this.launchCamera(1);
+        }
+      }, {
+        icon: "images",
+        text: "Gallery",
+        handler: () => {
+          this.launchCamera(0);
+        }
+      }]
     })
+
+    actionSheet.present();
+  }
+
+  async launchCamera(sourceType: number) {
+    
+    let options: CameraOptions = {
+      targetHeight: 400,
+      targetWidth: 400,
+      encodingType: 1,
+      sourceType: sourceType,
+      destinationType: 0,
+      quality: 80
+    }
+
+    try { 
+      let image = await this.camera.getPicture(options);
+      console.log(image);
+      this.imageBase64URL = "data:image/png;base64," + image;
+    } catch {
+      
+      console.log("User canceled the flow!");
+
+    }
 
   }
 }
